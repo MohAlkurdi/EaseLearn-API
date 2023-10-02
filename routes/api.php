@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CourseController;
+use App\Http\Controllers\CertificateController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,7 +28,11 @@ Route::get("/courses/{id}", [CourseController::class, "show"]);
 Route::get("/courses/search/{name}", [CourseController::class, "search"]);
 
 // Protected routes
-Route::post("/courses", [CourseController::class, "store"])->middleware('auth:sanctum');
-Route::put("/courses/{id}", [CourseController::class, "update"])->middleware('auth:sanctum');
-Route::delete("/courses/{id}", [CourseController::class, "destroy"])->middleware('auth:sanctum');
-Route::post("/logout", [AuthController::class, "logout"])->middleware('auth:sanctum');
+Route::middleware('auth:sanctum')->group(function () {
+    Route::post("/courses", [CourseController::class, "store"]);
+    Route::put("/courses/{id}", [CourseController::class, "update"]);
+    Route::delete("/courses/{id}", [CourseController::class, "destroy"]);
+    Route::post("/logout", [AuthController::class, "logout"]);
+    Route::post('/courses/{id}/enroll', [CertificateController::class, 'enrollCourse']);
+    Route::get("/user/courses", [CertificateController::class, "getUserCourses"]);
+});
