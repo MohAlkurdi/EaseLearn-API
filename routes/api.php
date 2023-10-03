@@ -35,4 +35,5 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post("/logout", [AuthController::class, "logout"]);
     Route::post('/courses/{id}/enroll', [CertificateController::class, 'enrollCourse']);
     Route::get("/user/courses", [CertificateController::class, "getUserCourses"]);
+    Route::get("/user", [AuthController::class, "user"]);
 });

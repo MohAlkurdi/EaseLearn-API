@@ -78,4 +78,14 @@ class AuthController extends Controller
 
         return response($response, 200);
     }
+
+    public function user(Request $request)
+    {
+        // Return the response
+        $response = [
+            'user' => $request->user(),
+        ];
+
+        return response($response, 200);
+    }
 }
