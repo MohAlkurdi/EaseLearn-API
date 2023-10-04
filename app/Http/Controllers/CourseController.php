@@ -57,6 +57,7 @@ class CourseController extends Controller
                 'message' => 'No course found'
             ], 404);
         }
+        return $course;
     }
 
     /**
