@@ -40,4 +40,16 @@ class CertificateController extends Controller
 
         return response()->json(['certificate' => $certificates], 200);
     }
+
+    // get certificate by unique number
+    public function getCertificate(string $uniqueNumber)
+    {
+        $certificate = Certificate::where('unique_number', $uniqueNumber)->with('course')->first();
+
+        if (!$certificate) {
+            return response()->json(['message' => 'Certificate not found.'], 404);
+        }
+
+        return response()->json(['certificate' => $certificate], 200);
+    }
 }

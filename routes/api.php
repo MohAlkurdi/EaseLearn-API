@@ -26,6 +26,7 @@ Route::post("/login", [AuthController::class, "login"]);
 Route::get("/courses", [CourseController::class, "index"]);
 Route::get("/courses/{id}", [CourseController::class, "show"]);
 Route::get("/courses/search/{name}", [CourseController::class, "search"]);
+Route::get("/certificate/{uniqueNumber}", [CertificateController::class, "getCertificate"]);
 
 // Protected routes
 Route::middleware('auth:sanctum')->group(function () {
