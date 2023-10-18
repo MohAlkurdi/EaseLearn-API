@@ -15,6 +15,7 @@ class AuthController extends Controller
             'name' => 'required|string',
             'email' => 'required|string|unique:users,email',
             'password' => 'required|string|confirmed',
+            'member_id' => 'required|digits:10|string|unique:users,member_id',
         ]);
 
         // Create the user
@@ -22,6 +23,7 @@ class AuthController extends Controller
             'name' => $fields['name'],
             'email' => $fields['email'],
             'password' => bcrypt($fields['password']),
+            'member_id' => $fields['member_id'],
         ]);
 
         // Create the token

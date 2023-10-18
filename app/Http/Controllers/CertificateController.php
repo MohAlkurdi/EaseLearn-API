@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\Certificate;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -51,5 +52,27 @@ class CertificateController extends Controller
         }
 
         return response()->json(['certificate' => $certificate], 200);
+    }
+
+    public function getUserCertificates(Request $request, $memberId)
+    {
+        $user = User::where('member_id', $memberId)->first();
+
+        if (!$user) {
+            return response()->json(['message' => 'User not found.'], 404);
+        }
+
+        $certificates = Certificate::where('user_id', $user->id)->with('course')->get();
+
+        if ($certificates->isEmpty()) {
+            return response()->json(['message' => 'No certificates found for this user.'], 404);
+        }
+
+        $certificates = $certificates->map(function ($certificate) {
+            $certificate['website_name'] = 'EaseLearn';
+            return $certificate;
+        });
+
+        return response()->json(['certificates' => $certificates], 200);
     }
 }
