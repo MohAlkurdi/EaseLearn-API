@@ -47,16 +47,16 @@ git clone https://github.com/MohAlkurdi/EaseLearn-API.git
 cp .env.example .env
 ```
 
-3. Generate Application Key:
-
-```bash
-php artisan key:generate
-```
-
-4. Install Composer Dependencies:
+3. Install Composer Dependencies:
 
 ```bash
 composer install
+```
+
+4. Generate Application Key:
+
+```bash
+php artisan key:generate
 ```
 
 5. Run Database Migrations:
@@ -88,7 +88,8 @@ POST /api/register
     "name": "User Name",
     "email": "m@m.com",
     "password": "12345678",
-    "password_confirmation": "12345678"
+    "password_confirmation": "12345678",
+    "member_id": "1111111111"
 }
 ```
 
